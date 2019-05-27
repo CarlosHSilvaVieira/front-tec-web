@@ -1,0 +1,9 @@
+
+.title {
+
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 1;
+    justify-content: center;
+    margin-bottom: 20px;
+}
