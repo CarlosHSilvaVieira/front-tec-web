@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import './index.css'
 
 import { AppContainer } from 'react-hot-loader'
 
