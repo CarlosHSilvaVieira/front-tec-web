@@ -15,6 +15,7 @@ class LoginForm extends React.Component {
 
         this.handleChangeEmail = this.handleChangeEmail.bind(this)
         this.handleChangeSenha = this.handleChangeSenha.bind(this)
+        this.handleLogin = this.handleLogin.bind(this)
     }
 
     handleChangeEmail(event) {
@@ -31,7 +32,7 @@ class LoginForm extends React.Component {
         })
     }
 
-    hendleLogin() {
+    handleLogin() {
         this.props.login(this.state.email, this.state.senha)
     }
 
@@ -53,7 +54,7 @@ class LoginForm extends React.Component {
                 <div className="form-group">
                     <span>Esqueceu seu login ? <Link to={'/alterar-senha'}>Alterar senha</Link></span>
                 </div>
-                <button type="button" className="btn btn-primary">Entrar</button>
+                <button type="button" onClick={this.handleLogin} className="btn btn-primary">Entrar</button>
             </div>
         )
     }

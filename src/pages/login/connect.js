@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { login } from '../../../redux/actions/userLogged'
+import { push } from 'connected-react-router';
 
 const MapStateToProps = (state) => {
 
@@ -11,7 +11,7 @@ const MapStateToProps = (state) => {
 
 const MapDispatchToProps = (dispatch) => bindActionCreators({
 
-    login: login
+    redirect: (route) => push(route),
 
 }, dispatch)
 
