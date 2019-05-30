@@ -5,6 +5,7 @@ const URL = 'http://localhost:3005/api/usuario'
 export const userLoggedActions = {
 
     LOGIN: 'LOGIN',
+    LOGOUT: 'LOGOUT',
 }
 
 export const login = (email, senha) => {
@@ -31,5 +32,15 @@ export const login = (email, senha) => {
                 payload: result
             })
         }
+    }
+}
+
+export const logout = () => {
+
+    return dispatch => {
+        dispatch({
+            type: userLoggedActions.LOGOUT,
+            payload: null,
+        })
     }
 }

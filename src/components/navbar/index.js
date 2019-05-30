@@ -5,6 +5,16 @@ import connect from './connect'
 
 class NavBar extends React.Component {
 
+    constructor(props) {
+        super(props)
+
+        this.handleLogout = this.handleLogout.bind(this)
+    }
+
+    handleLogout() {
+        this.props.logout()
+    }
+
     renderSelected() {
         return (
             <span class='sr-only'>(current)</span>
@@ -25,6 +35,27 @@ class NavBar extends React.Component {
             return (
                 <li className='nav-item'>
                     <Link className='nav-link' to='/login'>Entrar</Link>
+                </li>
+            )
+        }
+    }
+
+    renderExitButton() {
+
+        if (this.props.userLogged) {
+
+            return (
+                <li className='nav-item'>
+                    <span onClick={this.handleLogout}>
+                        <Link className='nav-link' to='/'>Sair</Link>
+                    </span>
+                    
+                </li>
+            )
+        }
+        else {
+            return (
+                <li className='nav-item'>
                 </li>
             )
         }
@@ -61,6 +92,7 @@ class NavBar extends React.Component {
                             </li>
 
                             {this.renderLogginButton()}
+                            {this.renderExitButton()}
                         </ul>
                     </div>
                 </nav>
