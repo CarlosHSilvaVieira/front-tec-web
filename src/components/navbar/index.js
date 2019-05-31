@@ -31,6 +31,14 @@ class NavBar extends React.Component {
                 </li>
             )
         }
+        else if (this.props.employee) {
+
+            return (
+                <li className='nav-item'>
+                    <Link className='nav-link' to='/area-do-funcionario'>{this.props.employee.nome}</Link>
+                </li>
+            )
+        }
         else {
             return (
                 <li className='nav-item'>
@@ -42,7 +50,7 @@ class NavBar extends React.Component {
 
     renderExitButton() {
 
-        if (this.props.userLogged) {
+        if (this.props.userLogged || this.props.employee) {
 
             return (
                 <li className='nav-item'>

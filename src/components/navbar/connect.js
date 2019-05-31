@@ -6,6 +6,7 @@ const MapStateToProps = (state) => {
 
     return {
         userLogged: state.userLogged.user,
+        employee: state.userLogged.employee,
     }
 }
 

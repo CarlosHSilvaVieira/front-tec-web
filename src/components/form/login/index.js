@@ -1,6 +1,9 @@
 import React from 'react'
 import style from './loginform.module.css'
 import { Link  } from 'react-router-dom'
+
+import Switch from '../../switch'
+
 import connect from './connect'
 
 class LoginForm extends React.Component {
@@ -10,12 +13,18 @@ class LoginForm extends React.Component {
 
         this.state = {
             email: '',
-            senha: ''
+            senha: '',
+            isEmployee: false,
         }
 
         this.handleChangeEmail = this.handleChangeEmail.bind(this)
         this.handleChangeSenha = this.handleChangeSenha.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
+        this.handleSwitch = this.handleSwitch.bind(this)
+    }
+
+    handleSwitch(value) {
+        this.setState({ isEmployee: value })
     }
 
     handleChangeEmail(event) {
@@ -33,7 +42,7 @@ class LoginForm extends React.Component {
     }
 
     handleLogin() {
-        this.props.login(this.state.email, this.state.senha)
+        this.props.login(this.state.email, this.state.senha, this.state.isEmployee)
     }
 
     render() {
@@ -47,6 +56,9 @@ class LoginForm extends React.Component {
                 <div className="form-group">
                     <label for="exampleInputPassword1">Senha</label>
                     <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Digite sua senha" onChange={this.handleChangeSenha} />
+                </div>
+                <div className="form-group">
+                   <Switch handleSwitch={this.handleSwitch} children={'Sou funcionário da BookStore'} />
                 </div>
                 <div className="form-group">
                    <span>Não possui cadastro ? <Link to={'/cadastrar-agora'}>Cadastrar agora</Link></span>
