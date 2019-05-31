@@ -11,6 +11,10 @@ class LoginPage extends React.Component {
 
             nextProps.redirect('/area-logada')
         }
+        else if (nextProps.employee) {
+
+            nextProps.redirect('/area-do-funcionario')
+        }
 
         return null
     }
@@ -19,7 +23,12 @@ class LoginPage extends React.Component {
     componentWillMount() {
 
         if (this.props.userLogged) {
+
             this.props.redirect('/area-logada')
+        }
+        else if (this.props.employee) {
+
+            this.props.redirect('/area-do-funcionario')
         }
     }
 
