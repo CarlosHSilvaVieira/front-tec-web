@@ -54,3 +54,25 @@ export const logout = () => {
         })
     }
 }
+
+export const registerUser = (usuario) => {
+
+    return async dispatch => {
+
+        const result = await axios.post(`${URL}/`, JSON.stringify({ usuario }), {
+            headers: {
+                'Accept': 'Application/json',
+                'Content-Type': 'Application/json',
+            }
+        })
+            .then((response) => response.data.resultado)
+
+        if (result) {
+
+            dispatch({
+                type: userLoggedActions.LOGIN,
+                payload: result
+            })
+        }
+    }
+}
