@@ -1,25 +1,44 @@
 import React from 'react'
 import connect from './connect'
+import { map } from 'lodash'
+
+import style from './sidebar.module.css'
 
 class SideBar extends React.Component {
 
+    renderMenus() {
+
+        return map(this.props.menus, (menu, index) => {
+
+            return (
+                <div>
+                    <h6>{menu.title}</h6>
+                    <ul className="nav flex-column mb-2">
+                        { this.renderItens(menu) }
+                    </ul>
+                </div>
+            )
+        })
+    }
+
+    renderItens(menu) {
+
+        return map(menu.itens, (item) => {
+
+            return (
+                <li className="nav-item">
+                    <a className="nav-link" href={item.href}>{item.nome}</a>
+                </li>
+            )
+        })
+    }
+
     render() {
         return (
-            <div className={'col-md-3 bg-light'}>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/" >Active</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="/" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
-                </ul>
+            <div className={'col-md-2 col-lg-2 bg-light'} style={{marginBottom: '20px'}}>
+                <div className={style.sidebar}>
+                    { this.renderMenus() }
+                </div>
             </div>
         )
     }

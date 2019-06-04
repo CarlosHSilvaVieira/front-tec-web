@@ -5,19 +5,42 @@ import style from './area.module.css'
 
 class AreaFuncionario extends React.Component {
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+
+        /*if (!nextProps.employee) {
+            nextProps.redirect('/')
+        }*/
+
+        return null
+    }
+
     render() {
+
+        const menus = [{
+            title: 'Produtos',
+            itens: [{
+                nome: 'Gerenciar Produtos',
+                href: '/produtos'
+            }]
+        }, {
+            title: 'Vendas',
+            itens: [{
+                nome: 'Gerenciar Vendas',
+                href: '/vendas'
+            }]
+        }]
+
 
         return (
             <div className={'container-fluid'}>
                 <div className={style.row}>
-                    <Sidebar />
+                    <Sidebar menus={menus} />
                     <div className={'col-md-9'}>
                         <div class="jumbotron">
-                            <h1 class="display-4">Hello, world!</h1>
-                            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                            <h1 class="display-4">Olá,</h1>
+                            <p class="lead">Essa é a parte do sistema reservada para os funcionários.</p>
                             <hr class="my-4" />
-                            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-                            <a class="btn btn-primary btn-lg" href="/" role="button">Learn more</a>
+                            <p>Nela você pode fazer o controle sobre os produtos e as vendas da loja.</p>
                         </div>
                     </div>
                 </div>
