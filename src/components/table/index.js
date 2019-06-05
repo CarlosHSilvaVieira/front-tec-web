@@ -1,4 +1,5 @@
 import React from 'react'
+import style from './table.module.css'
 import { map } from 'lodash'
 import { Icon } from 'react-icons-kit'
 import {eye} from 'react-icons-kit/fa/eye'
@@ -41,18 +42,18 @@ class Table extends React.Component {
                 <tr key={index}>
                     {tds}
                     <th scope="row">
-                        <span onClick={this.props.visualize(value)}>
-                            <Icon size={10} icon={eye} />
+                        <span className={style.btn_table} onClick={this.props.visualizar(value)}>
+                            <Icon size={20} icon={eye} />
                         </span>
                     </th>
                     <th scope="row">
-                        <span onClick={this.props.editar(value)}>
-                            <Icon size={10} icon={edit} />
+                        <span className={style.btn_table} onClick={this.props.editar(value)}>
+                            <Icon size={20} icon={edit} />
                         </span>
                     </th>
                     <th scope="row">
-                        <span onClick={this.props.remover(value)}>
-                            <Icon size={10} icon={trash} />
+                        <span className={style.btn_table} onClick={this.props.remover(value)}>
+                            <Icon size={20} icon={trash} />
                         </span>
                     </th>
                 </tr>
