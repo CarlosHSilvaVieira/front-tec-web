@@ -1,23 +1,21 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { push } from 'connected-react-router';
-import { getAllProdutos, create, edit } from '../../redux/actions/produtos'
+import { getAllAutores } from '../../../redux/actions/autores'
+import { getAllEditoras } from '../../../redux/actions/editoras'
 
 const MapStateToProps = (state) => {
 
     return {
         employee: state.userLogged.employee,
-        produtos: state.produto.produtos,
-        last_id: state.produto.last_id,
+        editoras: state.editora.editoras,
+        autores: state.autor.autores,
     }
 }
 
 const MapDispatchToProps = (dispatch) => bindActionCreators({
 
-    redirect: (route) => push(route),
-    getAllProdutos: getAllProdutos,
-    create,
-    edit,
+    getAllAutores,
+    getAllEditoras,
 
 }, dispatch)
 

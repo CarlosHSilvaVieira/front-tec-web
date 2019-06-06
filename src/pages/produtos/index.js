@@ -6,6 +6,7 @@ import { menus } from '../../utils/constants'
 import Sidebar from '../../components/sideBar'
 import Table from '../../components/table'
 import Modal from '../../components/modal'
+import FormProduto from '../../components/form/produto'
 
 class ProdutosPage extends React.Component {
 
@@ -14,16 +15,31 @@ class ProdutosPage extends React.Component {
 
         this.state = {
             title: 'Cadastrar',
-
+            saveFunction: () => {},
+            cancelFunction: () => {},
+            last_id: this.props.last_id,
         }
 
-        this.visualize = this.visualize.bind(this)
-        this.edit = this.edit.bind(this)
         this.remove = this.remove.bind(this)
-        this.create = this.create.bind(this)
+
+        this.onClickCreate = this.onClickCreate.bind(this)
+        this.onClickEdit = this.onClickEdit.bind(this)
     }
 
-    componentWillMount() {
+    static getDerivedStateFromProps(nextProps, prevState) {
+
+        if (nextProps.last_id !== prevState.last_id) {
+            nextProps.getAllProdutos()
+
+            return {
+                ...prevState,
+                last_id: nextProps.last_id
+            }
+        }
+        return null        
+    }
+
+    componentDidMount() {
         this.props.getAllProdutos()
     }
 
@@ -36,24 +52,25 @@ class ProdutosPage extends React.Component {
         return []
     }
 
-    edit(produto) {
+    onClickCreate() {
+        this.setState({
+            title: 'Cadastrar',
+            saveFunction: this.props.create,
+            cancelFunction: () => {}
+        })
+    }
 
+    onClickEdit() {
+
+        this.setState({
+            title: 'Editar',
+            saveFunction: this.props.edit,
+            cancelFunction: () => {}
+        })
     }
 
     remove(produto) {
-        // this.props.removeProduto(produto)
-        this.props.getAllProdutos()
-    }
 
-    visualize(produto) {
-
-    }
-
-    create() {
-
-        return (
-            <Modal />
-        )
     }
 
     render() {
@@ -75,21 +92,28 @@ class ProdutosPage extends React.Component {
                                     type={'button'}
                                     data-toggle="modal"
                                     data-target="#exampleModalCenter"
+                                    onClick={this.onClickCreate}
                                 >
                                     Cadastrar Produto
                                 </button>
                             </div>
                         </div>
-                        <Modal id={'exampleModalCenter'} title={'Cadastrar'}>
-                            {'algo'}
+                        <Modal id={'exampleModalCenter'} title={this.state.title}>
+                            <FormProduto
+                                handleSave={this.state.saveFunction}
+                                handleCancel={this.state.cancelFunction}
+                                cancelText={'Cancelar'}
+                                saveText={'Salvar'}
+                            />
                         </Modal>
                         <div className={'row'}>
                             <Table
                                 headers={this.createTableHeaders()}
                                 data={this.props.produtos}
-                                visualizar={this.visualize}
-                                editar={this.edit}
-                                remover={this.remove}
+                                visualize={() => { }}
+                                edit={this.onClickEdit}
+                                remove={this.remove}
+                                modal_id={'#exampleModalCenter'}
                             />
                         </div>
                     </div>

@@ -6,6 +6,7 @@ export const produtosActions = {
 
     SEARCH_HOME: 'SEARCH_HOME',
     ALL_PRODUTOS: 'ALL_PRODUTOS',
+    LAST_ID: 'LAST_ID',
 }
 
 export const searchHomeProdutos = () => {
@@ -44,6 +45,45 @@ export const getAllProdutos = () => {
                 type: produtosActions.ALL_PRODUTOS,
                 payload: result.produtos
             })
+        }
+    }
+}
+
+export const create = (produto) => {
+
+    return async dispatch => {
+
+        const result =  await axios.post(`${URL}`, JSON.stringify({ produto }), {
+            headers: {
+                'Content-Type': 'Application/json',
+            }
+        })
+        .then((response) => response.data)
+
+        if (result.id) {
+
+            dispatch({
+                type: produtosActions.LAST_ID,
+                payload: result.id
+            })
+        }
+    }
+}
+
+export const edit = (produto) => {
+
+    return async dispatch => {
+
+        const result =  await axios.put(`${URL}`, JSON.stringify({ produto }), {
+            headers: {
+                'Content-Type': 'Application/json',
+            }
+        })
+        .then((response) => response.data)
+
+        if (result.id) {
+
+            await getAllProdutos()
         }
     }
 }

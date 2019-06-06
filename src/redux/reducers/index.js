@@ -2,6 +2,8 @@ import { combineReducers } from 'redux'
 import { connectRouter } from 'connected-react-router'
 import carrinho from './carrinho'
 import produto from './produto'
+import autor from './autor'
+import editora from './editora'
 import userLogged from './userLogged'
 
 const reducers = (history) => combineReducers({
@@ -9,6 +11,8 @@ const reducers = (history) => combineReducers({
     carrinho,
     produto,
     userLogged,
+    autor,
+    editora,
 })
 
 export default reducers

@@ -2,11 +2,28 @@ import React from 'react'
 import style from './table.module.css'
 import { map } from 'lodash'
 import { Icon } from 'react-icons-kit'
-import {eye} from 'react-icons-kit/fa/eye'
-import {edit} from 'react-icons-kit/fa/edit'
-import {trash} from 'react-icons-kit/fa/trash'
+import { eye } from 'react-icons-kit/fa/eye'
+import { edit } from 'react-icons-kit/fa/edit'
+import { trash } from 'react-icons-kit/fa/trash'
 
 class Table extends React.Component {
+
+    constructor(props) {
+        super(props)
+
+        this.edit = this.edit.bind(this)
+        this.visualize = this.visualize.bind(this)
+        this.remove = this.remove.bind(this)
+    }
+
+    edit(event) {
+    }
+
+    visualize(event) {
+    }
+
+    remove(event) {
+    }
 
     renderHeader() {
 
@@ -42,17 +59,24 @@ class Table extends React.Component {
                 <tr key={index}>
                     {tds}
                     <th scope="row">
-                        <span className={style.btn_table} onClick={this.props.visualizar(value)}>
+                        <span className={style.btn_table} onClick={() => { this.props.visualize(value) }}>
                             <Icon size={20} icon={eye} />
                         </span>
                     </th>
                     <th scope="row">
-                        <span className={style.btn_table} onClick={this.props.editar(value)}>
-                            <Icon size={20} icon={edit} />
+                        <span className={style.btn_table} onClick={() => { this.props.edit(value) }}>
+                            <button
+                                type={'button'}
+                                data-toggle="modal"
+                                data_target={this.props.modal_id}
+                            >
+                                <Icon size={20} icon={edit} />
+                            </button>
+
                         </span>
                     </th>
                     <th scope="row">
-                        <span className={style.btn_table} onClick={this.props.remover(value)}>
+                        <span className={style.btn_table} onClick={() => { this.props.remove(value) }}>
                             <Icon size={20} icon={trash} />
                         </span>
                     </th>

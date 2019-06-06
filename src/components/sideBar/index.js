@@ -11,7 +11,7 @@ class SideBar extends React.Component {
         return map(this.props.menus, (menu, index) => {
 
             return (
-                <div>
+                <div key={index}>
                     <h6>{menu.title}</h6>
                     <ul className="nav flex-column mb-2">
                         { this.renderItens(menu) }
@@ -23,10 +23,10 @@ class SideBar extends React.Component {
 
     renderItens(menu) {
 
-        return map(menu.itens, (item) => {
+        return map(menu.itens, (item, index) => {
 
             return (
-                <li className="nav-item">
+                <li key={index} className="nav-item">
                     <a className="nav-link" href={item.href}>{item.nome}</a>
                 </li>
             )
