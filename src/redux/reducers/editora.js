@@ -11,6 +11,9 @@ export default (state = initialState, action) => {
         case editoraActions.GET_ALL_EDITORAS:
             return { ...state, editoras: action.payload }
 
+        case editoraActions.LAST_ID:
+            return { ...state, last_id: action.payload }
+
         default:
             return state
     }

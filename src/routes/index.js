@@ -7,6 +7,7 @@ import RegisterUserPage from '../pages/registerUser'
 import AreaFuncionario from '../pages/areaFuncionario'
 import ProdutosPage from '../pages/produtos'
 import AutoresPage from '../pages/autores'
+import EditorasPage from '../pages/editoras'
 import NavBar from '../components/navbar'
 import Footer from '../components/footer'
 
@@ -20,6 +21,7 @@ const routes = (
             <Route exact path='/area-do-funcionario' component={AreaFuncionario} />
             <Route exact path='/produtos' component={ProdutosPage} />
             <Route exact path='/autores' component={AutoresPage} />
+            <Route exact path='/editoras' component={EditorasPage} />
         </Switch>
         <Footer />
     </div>
