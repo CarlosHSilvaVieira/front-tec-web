@@ -18,6 +18,27 @@ const menus = [
             nome: 'Gerenciar Vendas',
             href: '/vendas'
         }]
+    },
+    {
+        title: 'Autores',
+        itens: [{
+            nome: 'Gerenciar Autores',
+            href: '/autores'
+        }]
+    },
+    {
+        title: 'Editoras',
+        itens: [{
+            nome: 'Gerenciar Editoras',
+            href: '/editoras'
+        }]
+    },
+    {
+        title: 'Funcionários',
+        itens: [{
+            nome: 'Gerenciar Funcionários',
+            href: '/funcionarios'
+        }]
     }]
 
 module.exports = {

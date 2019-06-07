@@ -6,6 +6,7 @@ import LoginPage from '../pages/login'
 import RegisterUserPage from '../pages/registerUser'
 import AreaFuncionario from '../pages/areaFuncionario'
 import ProdutosPage from '../pages/produtos'
+import AutoresPage from '../pages/autores'
 import NavBar from '../components/navbar'
 import Footer from '../components/footer'
 
@@ -18,6 +19,7 @@ const routes = (
             <Route exact path='/cadastrar-agora' component={RegisterUserPage} />
             <Route exact path='/area-do-funcionario' component={AreaFuncionario} />
             <Route exact path='/produtos' component={ProdutosPage} />
+            <Route exact path='/autores' component={AutoresPage} />
         </Switch>
         <Footer />
     </div>
