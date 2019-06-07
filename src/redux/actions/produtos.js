@@ -81,9 +81,23 @@ export const edit = (produto) => {
         })
         .then((response) => response.data)
 
-        if (result.id) {
+        if (result.resultado) {
 
-            await getAllProdutos()
+            await dispatch(getAllProdutos())
+        }
+    }
+}
+
+export const remove = (produto) => {
+
+    return async dispatch => {
+
+        const result = await axios.delete(`${URL}/${produto.id}`)
+        .then((response) => response.data)
+
+        if (result.resultado) {
+
+            await dispatch(getAllProdutos())
         }
     }
 }

@@ -8,23 +8,6 @@ import { trash } from 'react-icons-kit/fa/trash'
 
 class Table extends React.Component {
 
-    constructor(props) {
-        super(props)
-
-        this.edit = this.edit.bind(this)
-        this.visualize = this.visualize.bind(this)
-        this.remove = this.remove.bind(this)
-    }
-
-    edit(event) {
-    }
-
-    visualize(event) {
-    }
-
-    remove(event) {
-    }
-
     renderHeader() {
 
         const headers = map(this.props.headers, (header, index) => {
@@ -51,35 +34,28 @@ class Table extends React.Component {
             const tds = map(Object.keys(value), (key, code) => {
 
                 return (
-                    <th scope="row">{value[key]}</th>
+                    <td>{value[key]}</td>
                 )
             })
 
             return (
                 <tr key={index}>
                     {tds}
-                    <th scope="row">
+                    <td>
                         <span className={style.btn_table} onClick={() => { this.props.visualize(value) }}>
                             <Icon size={20} icon={eye} />
                         </span>
-                    </th>
-                    <th scope="row">
+                    </td>
+                    <td data-toggle='modal' data-target={this.props.modal_id}>
                         <span className={style.btn_table} onClick={() => { this.props.edit(value) }}>
-                            <button
-                                type={'button'}
-                                data-toggle="modal"
-                                data_target={this.props.modal_id}
-                            >
-                                <Icon size={20} icon={edit} />
-                            </button>
-
+                            <Icon size={20} icon={edit} />
                         </span>
-                    </th>
-                    <th scope="row">
+                    </td>
+                    <td>
                         <span className={style.btn_table} onClick={() => { this.props.remove(value) }}>
                             <Icon size={20} icon={trash} />
                         </span>
-                    </th>
+                    </td>
                 </tr>
             )
         })
@@ -89,8 +65,8 @@ class Table extends React.Component {
 
         return (
             <div className={'table-responsive'}>
-                <table class="table">
-                    <thead class="thead-dark">
+                <table className="table">
+                    <thead className="thead-dark">
                         <tr>
                             {this.renderHeader()}
                         </tr>

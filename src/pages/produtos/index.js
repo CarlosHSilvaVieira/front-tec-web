@@ -20,6 +20,8 @@ class ProdutosPage extends React.Component {
             last_id: this.props.last_id,
         }
 
+        this.create = this.create.bind(this)
+        this.edit = this.edit.bind(this)
         this.remove = this.remove.bind(this)
 
         this.onClickCreate = this.onClickCreate.bind(this)
@@ -55,22 +57,33 @@ class ProdutosPage extends React.Component {
     onClickCreate() {
         this.setState({
             title: 'Cadastrar',
-            saveFunction: this.props.create,
-            cancelFunction: () => {}
+            saveFunction: this.create,
+            cancelFunction: () => {},
+            target_produto: null,
         })
     }
 
-    onClickEdit() {
+    onClickEdit(produto) {
 
         this.setState({
             title: 'Editar',
-            saveFunction: this.props.edit,
-            cancelFunction: () => {}
+            saveFunction: this.edit,
+            cancelFunction: () => {},
+            target_produto: produto,
         })
     }
 
-    remove(produto) {
+    create(produto) {
+        this.props.create(produto)
+    }
 
+    edit(produto) {
+        this.props.edit(produto)
+        document.getElementById('closeModal').click()
+    }
+
+    remove(produto) {
+        this.props.remove(produto)
     }
 
     render() {
@@ -104,6 +117,7 @@ class ProdutosPage extends React.Component {
                                 handleCancel={this.state.cancelFunction}
                                 cancelText={'Cancelar'}
                                 saveText={'Salvar'}
+                                produto={this.state.target_produto}
                             />
                         </Modal>
                         <div className={'row'}>

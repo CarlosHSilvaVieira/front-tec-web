@@ -9,6 +9,7 @@ class FormProduto extends React.Component {
         super(props)
 
         this.state = {
+            id: this.props.produto ? this.props.produto.id : null,
             nome: this.props.produto ? this.props.produto.nome : '',
             descricao: this.props.produto ? this.props.produto.descricao : '',
             estoque: this.props.produto ? this.props.produto.estoque : 0,
@@ -18,12 +19,38 @@ class FormProduto extends React.Component {
             categoria: this.props.produto ? this.props.produto.categoria : '',
             autor_id: this.props.produto ? this.props.produto.autor_id : 0,
             editora_id: this.props.produto ? this.props.produto.editora_id : 0,
+            target_produto: this.props.produto,
         }
 
         this.handleChange = this.handleChange.bind(this)
         this.handleCancel = this.handleCancel.bind(this)
         this.handleSave = this.handleSave.bind(this)
         this.handleSelect = this.handleSelect.bind(this)
+    }
+
+    static getDerivedStateFromProps(next, prev) {
+
+        if (next.produto !== prev.target_produto) {
+
+            next.getAllAutores()
+            next.getAllEditoras()
+
+            return {
+                id: next.produto ? next.produto.id : '',
+                nome: next.produto ? next.produto.nome : '',
+                descricao: next.produto ? next.produto.descricao : '',
+                estoque: next.produto ? next.produto.estoque : 0,
+                valor_unitario: next.produto ? next.produto.valor_unitario : 0,
+                ano: next.produto ? next.produto.ano : new Date().getFullYear().toString(),
+                idioma: next.produto ? next.produto.idioma : '',
+                categoria: next.produto ? next.produto.categoria : '',
+                autor_id: next.produto ? next.produto.autor_id : 0,
+                editora_id: next.produto ? next.produto.editora_id : 0,
+                target_produto: next.produto,
+            }
+        }
+
+        return null
     }
 
     componentWillMount() {
@@ -93,7 +120,24 @@ class FormProduto extends React.Component {
 
     handleSave() {
 
-        const produto = this.state
+        const { id, nome, editora_id, autor_id, estoque, valor_unitario, descricao, categoria, ano, idioma } = this.state
+
+        let produto = {
+            nome,
+            editora_id,
+            autor_id,
+            estoque,
+            valor_unitario,
+            descricao,
+            categoria,
+            ano,
+            idioma
+        }
+
+        if (this.state.id) {
+            // edição
+            produto.id = id
+        }
 
         if (this.validadeProduto(produto)) {
 
@@ -161,39 +205,39 @@ class FormProduto extends React.Component {
                 <div className={'form-row'}>
                     <div className={'form-group col-md-6'}>
                         <label>Nome do Produto</label>
-                        <input type={'text'} id={'nome'} placeholder={'Nome'} className={'form-control'} onChange={this.handleChange}></input>
+                        <input type={'text'} id={'nome'} placeholder={'Nome'} className={'form-control'} onChange={this.handleChange} value={this.state.nome}></input>
                     </div>
                     <div className={'form-group col-md-6'}>
                         <label>Descrição</label>
-                        <input type={'text'} id={'descricao'} placeholder={'Descrição'} className={'form-control'} onChange={this.handleChange}></input>
+                        <input type={'text'} id={'descricao'} placeholder={'Descrição'} className={'form-control'} onChange={this.handleChange} value={this.state.descricao}></input>
                     </div>
                 </div>
 
                 <div className={'form-row'}>
                     <div className={'form-group col-md-6'}>
                         <label>Estoque</label>
-                        <input type={'number'} id={'estoque'} min={'0'} max={'200'} placeholder={'Estoque'} className={'form-control'} onChange={this.handleChange}></input>
+                        <input type={'number'} id={'estoque'} min={'0'} max={'200'} placeholder={'Estoque'} className={'form-control'} onChange={this.handleChange} value={this.state.estoque}></input>
                     </div>
                     <div className={'form-group col-md-6'}>
                         <label>Valor</label>
-                        <input type={'text'} id={'valor'} placeholder={'Valor'} className={'form-control'} onChange={this.handleChange}></input>
+                        <input type={'text'} id={'valor'} placeholder={'Valor'} className={'form-control'} onChange={this.handleChange} value={this.state.valor_unitario}></input>
                     </div>
                 </div>
 
                 <div className={'form-row'}>
                     <div className={'form-group col-md-6'}>
                         <label>Ano de lançamento</label>
-                        <input type={'text'} id={'ano'} placeholder={'Ano'} className={'form-control'} onChange={this.handleChange}></input>
+                        <input type={'text'} id={'ano'} placeholder={'Ano'} className={'form-control'} onChange={this.handleChange} value={this.state.ano}></input>
                     </div>
                     <div className={'form-group col-md-6'}>
                         <label>Idioma</label>
-                        <input type={'text'} id={'idioma'} placeholder={'Idioma'} className={'form-control'} onChange={this.handleChange}></input>
+                        <input type={'text'} id={'idioma'} placeholder={'Idioma'} className={'form-control'} onChange={this.handleChange} value={this.state.idioma}></input>
                     </div>
                 </div>
 
                 <div className={'form-group'}>
                     <label>Categoria</label>
-                    <input type={'text'} id={'categoria'} placeholder={'Categoria'} className={'form-control'} onChange={this.handleChange}></input>
+                    <input type={'text'} id={'categoria'} placeholder={'Categoria'} className={'form-control'} onChange={this.handleChange} value={this.state.categoria}></input>
                 </div>
 
                 <div className={'form-row'}>
