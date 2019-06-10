@@ -41,6 +41,23 @@ const menus = [
         }]
     }]
 
+const menus_usuarios = [
+    {
+        title: 'Area Logada',
+        itens: [{
+            nome: 'Inicio',
+            href: '/area-logada'
+        }]
+    },
+    {
+        title: 'Minhas compras',
+        itens: [{
+            nome: 'Gerenciar Produtos',
+            href: '/minhas-compras'
+        }]
+    }]
+
 module.exports = {
-    menus
+    menus,
+    menus_usuarios
 }

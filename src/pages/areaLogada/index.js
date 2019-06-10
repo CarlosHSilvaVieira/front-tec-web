@@ -1,14 +1,14 @@
 import React from 'react'
 import connect from './connect'
 import Sidebar from '../../components/sideBar'
-import { menus } from '../../utils/constants'
+import { menus_usuarios } from '../../utils/constants'
 import style from './area.module.css'
 
-class AreaFuncionario extends React.Component {
+class AreaLogada extends React.Component {
 
     static getDerivedStateFromProps(nextProps, prevState) {
 
-        if (!nextProps.employee) {
+        if (!nextProps.userLogged) {
             nextProps.redirect('/')
         }
 
@@ -20,15 +20,15 @@ class AreaFuncionario extends React.Component {
         return (
             <div className={'container-fluid'}>
                 <div className={style.row}>
-                    <Sidebar menus={menus} />
+                    <Sidebar menus={menus_usuarios} />
                     <div className={'col-md-9'}>
 
                         <div className={style.jumbotron}>
                             <div className="jumbotron">
-                                <h1 className="display-4">Olá, {this.props.employee.nome}</h1>
-                                <p className="lead">Essa é a parte do sistema reservada para os funcionários.</p>
+                                <h1 className="display-4">Olá, {this.props.userLogged.nome}</h1>
+                                <p className="lead">Essa é a parte do sistema reservada para você.</p>
                                 <hr className="my-4" />
-                                <p>Nela você pode fazer o controle sobre os produtos e as vendas da loja.</p>
+                                <p>Nela você pode fazer o controle sobre suas compras.</p>
                             </div>
                         </div>
                     </div>
@@ -38,4 +38,4 @@ class AreaFuncionario extends React.Component {
     }
 }
 
-export default connect(AreaFuncionario)
+export default connect(AreaLogada)
