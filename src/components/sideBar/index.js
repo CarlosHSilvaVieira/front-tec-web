@@ -2,6 +2,8 @@ import React from 'react'
 import connect from './connect'
 import { map } from 'lodash'
 
+import { Link } from 'react-router-dom'
+
 import style from './sidebar.module.css'
 
 class SideBar extends React.Component {
@@ -27,7 +29,7 @@ class SideBar extends React.Component {
 
             return (
                 <li key={index} className="nav-item">
-                    <a className="nav-link" href={item.href}>{item.nome}</a>
+                    <Link className="nav-link" to={item.href}>{item.nome}</Link>
                 </li>
             )
         })

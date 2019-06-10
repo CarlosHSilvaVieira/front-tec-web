@@ -15,6 +15,15 @@ class AreaLogada extends React.Component {
         return null
     }
 
+    renderName() {
+
+        if (this.props.userLogged) {
+            return this.props.userLogged.nome
+        }
+
+        return ''
+    }
+
     render() {
 
         return (
@@ -25,7 +34,7 @@ class AreaLogada extends React.Component {
 
                         <div className={style.jumbotron}>
                             <div className="jumbotron">
-                                <h1 className="display-4">Olá, {this.props.userLogged.nome}</h1>
+                                <h1 className="display-4">Olá, {this.renderName()}</h1>
                                 <p className="lead">Essa é a parte do sistema reservada para você.</p>
                                 <hr className="my-4" />
                                 <p>Nela você pode fazer o controle sobre suas compras.</p>
