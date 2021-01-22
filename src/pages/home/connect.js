@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import { bindActionCreators } from 'redux'
-import { searchHomeProdutos } from '../../redux/actions/produtos';
+import { searchHomeProdutos } from '../../store/actions/produtos';
 
 const MapStateToProps = (state) => {
 

@@ -8,7 +8,7 @@ import './index.css'
 
 import { AppContainer } from 'react-hot-loader'
 
-import store, { history } from './redux/store'
+import store, { history } from './store/store'
 
 const render = () => {
 

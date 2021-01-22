@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { registerUser } from '../../../redux/actions/userLogged'
+import { registerUser } from '../../../store/actions/userLogged'
 import { push } from 'connected-react-router';
 
 const MapStateToProps = (state) => {

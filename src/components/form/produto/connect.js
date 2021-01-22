@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getAllAutores } from '../../../redux/actions/autores'
-import { getAllEditoras } from '../../../redux/actions/editoras'
+import { getAllAutores } from '../../../store/actions/autores'
+import { getAllEditoras } from '../../../store/actions/editoras'
 
 const MapStateToProps = (state) => {
 

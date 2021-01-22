@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { push } from 'connected-react-router';
-import { getAllProdutos, create, edit, remove } from '../../redux/actions/produtos'
+import { getAllProdutos, create, edit, remove } from '../../store/actions/produtos'
 
 const MapStateToProps = (state) => {
 

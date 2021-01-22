@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { logout } from '../../redux/actions/userLogged'
+import { logout } from '../../store/actions/userLogged'
 
 const MapStateToProps = (state) => {
 
