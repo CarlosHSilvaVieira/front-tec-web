@@ -124,9 +124,9 @@ class EditorasPage extends React.Component {
                             <Table
                                 headers={this.createTableHeaders()}
                                 data={this.props.editoras}
-                                visualize={() => { }}
-                                edit={this.onClickEdit}
-                                remove={this.remove}
+                                onVisualize={() => { }}
+                                onEdit={this.onClickEdit}
+                                onRemove={this.remove}
                                 modal_id={'#exampleModalCenter'}
                             />
                         </div>

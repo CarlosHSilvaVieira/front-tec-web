@@ -124,9 +124,9 @@ class AutoresPage extends React.Component {
                             <Table
                                 headers={this.createTableHeaders()}
                                 data={this.props.autores}
-                                visualize={() => { }}
-                                edit={this.onClickEdit}
-                                remove={this.remove}
+                                onVisualize={() => { }}
+                                onEdit={this.onClickEdit}
+                                onRemove={this.remove}
                                 modal_id={'#exampleModalCenter'}
                             />
                         </div>
