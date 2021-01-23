@@ -7,7 +7,7 @@ const Card = ({ produto }) => {
   const dispatch = useDispatch();
 
   const handleBuy = () => {
-    dispatch(addCarrinho(produto));
+    // dispatch(addCarrinho(produto));
     history.push("/carrinho");
   };
 

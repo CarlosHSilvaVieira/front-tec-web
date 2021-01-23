@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const Switch = ({ handleSwitch, children }) => {
   const [value, setValue] = useState(false);
 
-  const handleSwitch = (event) => {
+  const onSwitch = (event) => {
     setValue(event.target.checked);
     handleSwitch?.(event.target.checked);
   };
@@ -12,7 +12,7 @@ const Switch = ({ handleSwitch, children }) => {
     <div className="custom-control custom-switch">
       <input
         value={value}
-        onChange={(e) => handleSwitch(e)}
+        onChange={(e) => onSwitch(e)}
         type="checkbox"
         className="custom-control-input"
         id="customSwitch1"

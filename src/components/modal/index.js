@@ -1,6 +1,6 @@
 import React from "react";
 
-const Modal = ({ renderFooter, onClose, onClick, children }) => {
+const Modal = ({ renderFooter, onClose, onClick, children, btnTitle, id, title }) => {
   const renderModalFooter = () => {
     if (renderFooter) {
       return (
@@ -30,7 +30,7 @@ const Modal = ({ renderFooter, onClose, onClick, children }) => {
   return (
     <div
       className="modal fade"
-      id={this.props.id}
+      id={id}
       tabIndex="-1"
       role="dialog"
       aria-labelledby="modalCenterTitle"
@@ -40,7 +40,7 @@ const Modal = ({ renderFooter, onClose, onClick, children }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="modalCenterTitle">
-              {this.props.title}
+              {title}
             </h5>
             <button
               id={"closeModal"}
