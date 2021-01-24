@@ -1,21 +1,17 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { logout } from "../../store/actions/userLogged";
+import { logoutUser } from "../../store/users/users.actions";
 
 const NavBar = () => {
   const dispatch = useDispatch();
   const { userLogged, employee } = useSelector((state) => ({
-    userLogged: state.userLogged.user,
-    employee: state.userLogged.employee,
+    userLogged: state.user.user.data,
+    employee: state.employee.employee.data,
   }));
 
   const handleLogout = () => {
-    dispatch(logout());
-  };
-
-  const renderSelected = () => {
-    return <span class="sr-only">(current)</span>;
+    dispatch(logoutUser());
   };
 
   const renderLogginButton = () => {

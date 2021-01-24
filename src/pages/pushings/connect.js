@@ -1,18 +1,24 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { push } from 'connected-react-router';
+import { getAllPushingsStart, createPushingStart, editPushingStart, deletePushingStart } from '../../store/pushing/pushing.actions'
 
 const MapStateToProps = (state) => {
 
     return {
-        userLogged: state.user.user.data,
-        employee: state.employee.employee.data,
+        employee: state.userLogged.employee,
+        editoras: state.editora.editoras,
+        last_id: state.editora.last_id,
     }
 }
 
 const MapDispatchToProps = (dispatch) => bindActionCreators({
 
     redirect: (route) => push(route),
+    // getAllEditoras,
+    // create,
+    // edit,
+    // remove,
 
 }, dispatch)
 
