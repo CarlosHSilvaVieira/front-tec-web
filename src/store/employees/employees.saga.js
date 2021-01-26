@@ -19,7 +19,7 @@ function* loginEmployeer({ payload }) {
 
     yield put({
       type: employeersActions.EMPLOYEER_LOGIN_SUCCESS,
-      payload: result.resultado,
+      payload: result.data.resultado,
     });
   } catch (error) {
     yield put({

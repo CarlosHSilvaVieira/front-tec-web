@@ -66,7 +66,7 @@ const Table = ({ headers, data, modal_id, onRemove, onEdit, onVisualize }) => {
   };
 
   return (
-    <div className={"table-responsive"}>
+    <div className="table-responsive">
       <table className="table">
         <thead className="thead-dark">
           <tr>{renderHeader()}</tr>

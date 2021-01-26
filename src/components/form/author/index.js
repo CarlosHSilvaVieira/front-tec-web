@@ -162,18 +162,18 @@ const FormAuthor = ({ autor, onCancel, onSave, saveText, cancelText }) => {
           />
         </FormRow>
         <FormRow>
-          <div className={"form-group col-md-6"}>
+          <div className="form-group col-md-6">
             <button
               type="button"
               data-dismiss="modal"
               onClick={(e) => handleCancel(e)}
-              className={"btn btn-block btn-danger"}
+              className="btn btn-block btn-danger"
             >
               {cancelText}
             </button>
           </div>
-          <div className={"form-group col-md-6"}>
-            <button type="submit" className={"btn btn-block btn-primary"}>
+          <div className="form-group col-md-6">
+            <button type="submit" className="btn btn-block btn-primary">
               {saveText}
             </button>
           </div>

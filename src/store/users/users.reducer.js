@@ -149,20 +149,21 @@ const getAllUserFail = (state, action) =>
 
 const addItemToCart = (state, action) => {
   const cart = state.shoppingCart;
-  const item = action.payload;
+  const item = action.book;
   if (item?.id) {
     cart[item.id] = {
       item: item,
       quantity: cart?.[item.id]?.quantity ? cart[item.id].quantity + 1 : 1,
     };
   }
+  console.log(cart);
 
   return updateObject(state, { shoppingCart: cart });
 };
 
 const increaseItemToCart = (state, action) => {
   const cart = state.shoppingCart;
-  const item = action.payload;
+  const item = action.book;
   if (item?.id && cart?.[item.id]) {
     cart[item.id] = {
       ...cart[item.id],
@@ -174,7 +175,7 @@ const increaseItemToCart = (state, action) => {
 
 const decreaseItemToCart = (state, action) => {
   const cart = state.shoppingCart;
-  const item = action.payload;
+  const item = action.book;
   if (item?.id && cart?.[item.id]) {
     cart[item.id] = {
       ...cart[item.id],
@@ -186,7 +187,7 @@ const decreaseItemToCart = (state, action) => {
 
 const removeItemFromCart = (state, action) => {
   const cart = state.shoppingCart;
-  const item = action.payload;
+  const item = action.book;
   delete cart?.[item.id];
   return updateObject(state, { shoppingCart: cart });
 };
@@ -259,7 +260,7 @@ export default (state = INITIAL_STATE, action) => {
 
     /* shopping cart */
     case usersActions.ADD_ITEM_TO_CART:
-      return addItemToCart(state);
+      return addItemToCart(state, action);
 
     case usersActions.INCREASE_ITEM_FROM_CART:
       return increaseItemToCart(state, action);

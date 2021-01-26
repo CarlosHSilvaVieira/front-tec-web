@@ -96,6 +96,16 @@ export const RemoveItemFromCart = (book) => ({
     book
 });
 
+export const IncreaseItemFromCart = (book) => ({
+    type: actionTypes.INCREASE_ITEM_FROM_CART,
+    book
+});
+
+export const DeacreseItemFromCart = (book) => ({
+    type: actionTypes.DECREASE_ITEM_FROM_CART,
+    book
+});
+
 export const UpdateCart = (books) => ({
     type: actionTypes.UPDATE_CART,
     books

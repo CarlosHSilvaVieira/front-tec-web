@@ -14,7 +14,7 @@ import {
   deleteAuthorStart,
 } from "../../store/authors/authors.actions";
 
-const authorsPage = ({}) => {
+const AuthorsPage = ({}) => {
   const [title, setTitle] = useState("Cadastrar");
   const [selectedAuthor, setSelectedAuthor] = useState(null);
   const [formSaveFunction, setFormSaveFunction] = useState(() => {});
@@ -23,14 +23,20 @@ const authorsPage = ({}) => {
   const dispatch = useDispatch();
 
   const { employee, authors, lastId } = useSelector((state) => ({
-    employee: state.userLogged.employee,
-    authors: state.author.authors,
-    lastId: state.author.last_id,
+    employee: state.employee.employee.data,
+    authors: state.author.listAuthors.rows,
+    lastId: state.author.createAuthor.lastId,
   }));
 
   useEffect(() => {
     dispatch(getAllAuthorsStart());
   }, []);
+
+  useEffect(() => {
+    if (lastId) {
+      dispatch(getAllAuthorsStart());
+    }
+  }, [lastId]);
 
   const createTableHeaders = () => {
     if (authors.length) {
@@ -66,20 +72,20 @@ const authorsPage = ({}) => {
   };
 
   return (
-    <div className={"container-fluid"} style={{ minHeight: "100vh" }}>
-      <div className={"row"} style={{ minHeight: "100vh" }}>
+    <div className="container-fluid" style={{ minHeight: "100vh" }}>
+      <div className="row" style={{ minHeight: "100vh" }}>
         <Sidebar menus={menus} />
-        <div className={"col"}>
-          <div className={"row"}>
+        <div className="col">
+          <div className="row">
             <div className={style.title}>
               <h2>Gerenciamento de authors</h2>
             </div>
           </div>
-          <div className={"row"}>
+          <div className="row">
             <div className={style.btn_container}>
               <button
-                className={"btn btn-primary"}
-                type={"button"}
+                className="btn btn-primary"
+                type="button"
                 data-toggle="modal"
                 data-target="#exampleModalCenter"
                 onClick={onClickCreate}
@@ -88,23 +94,23 @@ const authorsPage = ({}) => {
               </button>
             </div>
           </div>
-          <Modal id={"exampleModalCenter"} title={title}>
+          <Modal id="exampleModalCenter" title={title}>
             <Formauthor
               handleSave={formSaveFunction}
               handleCancel={formCancelFunction}
-              cancelText={"Cancelar"}
-              saveText={"Salvar"}
+              cancelText="Cancelar"
+              saveText="Salvar"
               author={selectedAuthor}
             />
           </Modal>
-          <div className={"row"}>
+          <div className="row">
             <Table
               headers={createTableHeaders()}
               data={authors}
               onVisualize={() => {}}
               onEdit={onClickEdit}
               onRemove={onRemoveAuthor}
-              modal_id={"#exampleModalCenter"}
+              modal_id="#exampleModalCenter"
             />
           </div>
         </div>
@@ -113,4 +119,4 @@ const authorsPage = ({}) => {
   );
 };
 
-export default authorsPage;
+export default AuthorsPage;

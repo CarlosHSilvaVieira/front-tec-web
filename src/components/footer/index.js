@@ -12,15 +12,15 @@ const Footer = () => {
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className={style.list_items}>
           <span className={style.item}>
-            <Icon size={"30px"} icon={instagram} />
+            <Icon size="30px" icon={instagram} />
           </span>
 
           <span className={style.item}>
-            <Icon size={"30px"} icon={facebookSquare} />
+            <Icon size="30px" icon={facebookSquare} />
           </span>
 
           <span className={style.item}>
-            <Icon size={"30px"} icon={twitterSquare} />
+            <Icon size="30px" icon={twitterSquare} />
           </span>
         </div>
       </nav>

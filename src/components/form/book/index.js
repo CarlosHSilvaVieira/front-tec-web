@@ -185,128 +185,128 @@ const FormBook = ({ book, handleCancel, handleSave, cancelText, saveText }) => {
 
   return (
     <div>
-      <div className={"form-row"}>
-        <div className={"form-group col-md-6"}>
+      <div className="form-row">
+        <div className="form-group col-md-6">
           <label>Nome do Produto</label>
           <input
-            type={"text"}
-            id={"name"}
-            placeholder={"Nome"}
-            className={"form-control"}
+            type="text"
+            id="name"
+            placeholder="Nome"
+            className="form-control"
             onChange={onChange}
             value={stateBook?.name}
           ></input>
         </div>
-        <div className={"form-group col-md-6"}>
+        <div className="form-group col-md-6">
           <label>Descrição</label>
           <input
-            type={"text"}
-            id={"description"}
-            placeholder={"Descrição"}
-            className={"form-control"}
+            type="text"
+            id="description"
+            placeholder="Descrição"
+            className="form-control"
             onChange={onChange}
             value={stateBook?.description}
           ></input>
         </div>
       </div>
 
-      <div className={"form-row"}>
-        <div className={"form-group col-md-6"}>
+      <div className="form-row">
+        <div className="form-group col-md-6">
           <label>Estoque</label>
           <input
-            type={"number"}
-            id={"stock"}
-            min={"0"}
-            max={"200"}
-            placeholder={"Estoque"}
-            className={"form-control"}
+            type="number"
+            id="stock"
+            min="0"
+            max="200"
+            placeholder="Estoque"
+            className="form-control"
             onChange={onChange}
             value={stateBook?.stock}
           ></input>
         </div>
-        <div className={"form-group col-md-6"}>
+        <div className="form-group col-md-6">
           <label>Valor</label>
           <input
-            type={"text"}
-            id={"price"}
-            placeholder={"Valor"}
-            className={"form-control"}
+            type="text"
+            id="price"
+            placeholder="Valor"
+            className="form-control"
             onChange={onChange}
             value={stateBook?.price}
           ></input>
         </div>
       </div>
 
-      <div className={"form-row"}>
-        <div className={"form-group col-md-6"}>
+      <div className="form-row">
+        <div className="form-group col-md-6">
           <label>Data de lançamento</label>
           <input
-            type={"date"}
-            id={"release"}
-            placeholder={"Data de lançamento"}
-            className={"form-control"}
+            type="date"
+            id="release"
+            placeholder="Data de lançamento"
+            className="form-control"
             onChange={onChange}
             value={stateBook?.release}
           ></input>
         </div>
-        <div className={"form-group col-md-6"}>
+        <div className="form-group col-md-6">
           <label>Idioma</label>
           <input
-            type={"text"}
-            id={"language"}
-            placeholder={"Idioma"}
-            className={"form-control"}
+            type="text"
+            id="language"
+            placeholder="Idioma"
+            className="form-control"
             onChange={onChange}
             value={stateBook?.language}
           ></input>
         </div>
       </div>
 
-      <div className={"form-group"}>
+      <div className="form-group">
         <label>Categoria</label>
         <input
-          type={"text"}
-          id={"category"}
-          placeholder={"Categoria"}
-          className={"form-control"}
+          type="text"
+          id="category"
+          placeholder="Categoria"
+          className="form-control"
           onChange={onChange}
           value={stateBook?.category}
         ></input>
       </div>
 
-      <div className={"form-row"}>
-        <div className={"form-group col-md-6"}>
+      <div className="form-row">
+        <div className="form-group col-md-6">
           <label>Autor</label>
-          <select className={"form-control"} id={"author"} onChange={onSelect}>
+          <select className="form-control" id="author" onChange={onSelect}>
             <option value={0}>Selecione</option>
             {makeAutoresOptions()}
           </select>
         </div>
-        <div className={"form-group col-md-6"}>
+        <div className="form-group col-md-6">
           <label>Editora</label>
-          <select className={"form-control"} id={"pushing"} onChange={onSelect}>
+          <select className="form-control" id="pushing" onChange={onSelect}>
             <option value={0}>Selecione</option>
             {makeEditorasOptions()}
           </select>
         </div>
       </div>
 
-      <div className={"form-row"}>
-        <div className={"form-group col-md-6"}>
+      <div className="form-row">
+        <div className="form-group col-md-6">
           <button
             type="button"
             data-dismiss="modal"
             onClick={onCancel}
-            className={"btn btn-block btn-danger"}
+            className="btn btn-block btn-danger"
           >
             {cancelText}
           </button>
         </div>
-        <div className={"form-group col-md-6"}>
+        <div className="form-group col-md-6">
           <button
             type="button"
             onClick={onSave}
-            className={"btn btn-block btn-primary"}
+            className="btn btn-block btn-primary"
           >
             {saveText}
           </button>

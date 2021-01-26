@@ -73,9 +73,9 @@ export const getBooksHomeStart = () => ({
   type: actionTypes.GET_BOOK_HOME_START,
 });
 
-export const getBooksHomeSucess = (book) => ({
+export const getBooksHomeSucess = (data) => ({
   type: actionTypes.GET_BOOK_HOME_SUCCESS,
-  book,
+  data,
 });
 
 export const getBooksHomeFail = (error, message) => ({
@@ -89,9 +89,9 @@ export const getAllBooksStart = () => ({
   type: actionTypes.GET_ALL_BOOKS_START,
 });
 
-export const getAllBooksSucess = (books) => ({
+export const getAllBooksSucess = (data) => ({
   type: actionTypes.GET_ALL_BOOKS_SUCCESS,
-  books,
+  data,
 });
 
 export const getAllBooksFail = (error, message) => ({

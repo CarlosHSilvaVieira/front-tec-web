@@ -78,13 +78,13 @@ const NavBar = () => {
         <ul className="navbar-nav">
           <li className="nav-item active">
             <Link className="nav-link" to="/">
-              Home{" "}
+              Home" "
             </Link>
           </li>
 
           <li className="nav-item dropdown">
             <button
-              type={"button"}
+              type="button"
               style={{
                 background: "transparent",
                 border: "none",

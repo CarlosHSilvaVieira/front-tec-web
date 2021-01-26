@@ -1,141 +1,122 @@
-import React from 'react'
-import connect from './connect'
-import style from './editoras.module.css'
-import { menus } from '../../utils/constants'
+import React, { useState, useEffect } from "react";
+import style from "./editoras.module.css";
+import { menus } from "../../utils/constants";
 
-import Sidebar from '../../components/sideBar'
-import Table from '../../components/table'
-import Modal from '../../components/modal'
-import FormPushing from '../../components/form/pushing'
+import Sidebar from "../../components/sideBar";
+import Table from "../../components/table";
+import Modal from "../../components/modal";
+import FormPushing from "../../components/form/pushing";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getAllPushingsStart,
+  createPushingStart,
+  editPushingStart,
+  deletePushingStart,
+} from "../../store/pushing/pushing.actions";
 
-class EditorasPage extends React.Component {
+const PublishingPage = () => {
+  const [title, setTitle] = useState("Cadastrar");
+  const [selectedPublishing, setSelectedPublishing] = useState(null);
+  const [formSaveFunction, setFormSaveFunction] = useState(() => {});
+  const [formCancelFunction, setFormCancelFunction] = useState(() => {});
 
-    constructor(props) {
-        super(props)
+  const dispatch = useDispatch();
 
-        this.state = {
-            title: 'Cadastrar',
-            saveFunction: () => {},
-            cancelFunction: () => {},
-            last_id: this.props.last_id,
-        }
+  const { employee, listPushings, lastId } = useSelector((state) => ({
+    employee: state.employee.employee.data,
+    listPushings: state.pushing.listPushings.rows,
+    lastId: state.pushing.createPushing.lastId,
+  }));
 
-        this.create = this.create.bind(this)
-        this.edit = this.edit.bind(this)
-        this.remove = this.remove.bind(this)
+  useEffect(() => {
+    dispatch(getAllPushingsStart());
+  }, []);
 
-        this.onClickCreate = this.onClickCreate.bind(this)
-        this.onClickEdit = this.onClickEdit.bind(this)
+  useEffect(() => {
+    if (lastId) {
+      dispatch(getAllPushingsStart());
     }
+  }, [lastId]);
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-
-        if (nextProps.last_id !== prevState.last_id) {
-            nextProps.getAllEditoras()
-
-            return {
-                ...prevState,
-                last_id: nextProps.last_id
-            }
-        }
-        return null        
+  const createTableHeaders = () => {
+    if (listPushings.length) {
+      const publishing = listPushings[0];
+      return Object.keys(publishing);
     }
+    return [];
+  };
 
-    componentDidMount() {
-        this.props.getAllEditoras()
-    }
+  const onClickCreate = () => {
+    setTitle("Cadastrar");
+    setFormSaveFunction(onCreate);
+    setSelectedPublishing(null);
+  };
 
-    createTableHeaders() {
-        if (this.props.editoras.length) {
+  const onClickEdit = (publishing) => {
+    setTitle("Editar");
+    setFormSaveFunction(onEdit);
+    setSelectedPublishing(publishing);
+  };
 
-            const editora = this.props.editoras[0]
-            return Object.keys(editora)
-        }
-        return []
-    }
+  const onCreate = (publishing) => {
+    dispatch(createPushingStart(publishing));
+  };
 
-    onClickCreate() {
-        this.setState({
-            title: 'Cadastrar',
-            saveFunction: this.create,
-            cancelFunction: () => {},
-            target_editora: null,
-        })
-    }
+  const onEdit = (publishing) => {
+    dispatch(editPushingStart(publishing));
+    document.getElementById("closeModal").click();
+  };
 
-    onClickEdit(editora) {
+  const onRemove = (publishing) => {
+    dispatch(deletePushingStart(publishing));
+  };
 
-        this.setState({
-            title: 'Editar',
-            saveFunction: this.edit,
-            cancelFunction: () => {},
-            target_editora: editora,
-        })
-    }
-
-    create(editora) {
-        this.props.create(editora)
-    }
-
-    edit(editora) {
-        this.props.edit(editora)
-        document.getElementById('closeModal').click()
-    }
-
-    remove(editora) {
-        this.props.remove(editora)
-    }
-
-    render() {
-
-        return (
-            <div className={'container-fluid'} style={{ minHeight: '100vh' }}>
-                <div className={'row'} style={{ minHeight: '100vh' }}>
-                    <Sidebar menus={menus} />
-                    <div className={'col'}>
-                        <div className={'row'}>
-                            <div className={style.title}>
-                                <h2>Gerenciamento de Editoras</h2>
-                            </div>
-                        </div>
-                        <div className={'row'}>
-                            <div className={style.btn_container}>
-                                <button
-                                    className={'btn btn-primary'}
-                                    type={'button'}
-                                    data-toggle="modal"
-                                    data-target="#exampleModalCenter"
-                                    onClick={this.onClickCreate}
-                                >
-                                    Cadastrar Autor
-                                </button>
-                            </div>
-                        </div>
-                        <Modal id={'exampleModalCenter'} title={this.state.title}>
-                            <FormPushing
-                                handleSave={this.state.saveFunction}
-                                handleCancel={this.state.cancelFunction}
-                                cancelText={'Cancelar'}
-                                saveText={'Salvar'}
-                                pushing={this.state.target_editora}
-                            />
-                        </Modal>
-                        <div className={'row'}>
-                            <Table
-                                headers={this.createTableHeaders()}
-                                data={this.props.editoras}
-                                onVisualize={() => { }}
-                                onEdit={this.onClickEdit}
-                                onRemove={this.remove}
-                                modal_id={'#exampleModalCenter'}
-                            />
-                        </div>
-                    </div>
-
-                </div>
+  return (
+    <div className="container-fluid" style={{ minHeight: "100vh" }}>
+      <div className="row" style={{ minHeight: "100vh" }}>
+        <Sidebar menus={menus} />
+        <div className="col">
+          <div className="row">
+            <div className={style.title}>
+              <h2>Gerenciamento de Editoras</h2>
             </div>
-        )
-    }
-}
+          </div>
+          <div className="row">
+            <div className={style.btn_container}>
+              <button
+                className="btn btn-primary"
+                type="button"
+                data-toggle="modal"
+                data-target="#exampleModalCenter"
+                onClick={onClickCreate}
+              >
+                Cadastrar Autor
+              </button>
+            </div>
+          </div>
+          <Modal id="exampleModalCenter" title={title}>
+            <FormPushing
+              handleSave={formSaveFunction}
+              handleCancel={formCancelFunction}
+              cancelText="Cancelar"
+              saveText="Salvar"
+              pushing={selectedPublishing}
+            />
+          </Modal>
+          <div className="row">
+            <Table
+              headers={createTableHeaders()}
+              data={listPushings}
+              onVisualize={() => {}}
+              onEdit={onClickEdit}
+              onRemove={onRemove}
+              modal_id="#exampleModalCenter"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default connect(EditorasPage)
+export default PublishingPage;

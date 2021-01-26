@@ -9,10 +9,10 @@ function* createAuthor({ payload }) {
       `${AUTHOR_API}`,
       JSON.stringify({ autor: payload })
     );
-    console.log(result);
+    
     yield put({
       type: authorActions.CREATE_AUTHOR_SUCCESS,
-      lastId: result.id,
+      lastId: result.data.id,
       data: null,
     });
   } catch (error) {
@@ -30,10 +30,10 @@ function* editAuthor({ payload }) {
       `${AUTHOR_API}`,
       JSON.stringify({ autor: payload })
     );
-    console.log(result);
+    
     yield put({
       type: authorActions.EDIT_AUTHOR_SUCCESS,
-      lastId: result.id,
+      lastId: result.data.id,
       data: null,
     });
     yield put({ type: authorActions.GET_ALL_AUTHORS_START });
@@ -49,7 +49,7 @@ function* editAuthor({ payload }) {
 function* deleteAuthor({ payload }) {
   try {
     const result = yield API.delete(`${AUTHOR_API}/${payload.id}`);
-    console.log(result);
+    
     yield put({ type: authorActions.DELETE_AUTHOR_SUCCESS });
     yield put({ type: authorActions.GET_ALL_AUTHORS_START });
   } catch (error) {
@@ -71,7 +71,7 @@ function* getAllAuthors() {
 
     yield put({
       type: authorActions.GET_ALL_AUTHORS_SUCCESS,
-      payload: result.autores,
+      payload: result.data.autores,
     });
   } catch (error) {
     yield put({

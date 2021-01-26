@@ -7,11 +7,11 @@ import * as url from "../utils/url";
 import Home from "../pages/home";
 import LoginPage from "../pages/login";
 import RegisterUserPage from "../pages/registerUser";
-import AreaFuncionario from "../pages/employeerArea";
-import ProdutosPage from "../pages/books";
-import AutoresPage from "../pages/authors";
-import EditorasPage from "../pages/pushings";
-import AreaLogada from "../pages/userArea";
+import EmployeeArea from "../pages/employeeArea";
+import BooksPage from "../pages/books";
+import AuthorsPage from "../pages/authors";
+import PublishingsPage from "../pages/pushings";
+import UserArea from "../pages/userArea";
 import NavBar from "../components/navbar";
 import Footer from "../components/footer";
 
@@ -22,12 +22,12 @@ const Routes = () => (
       <Switch>
         <Route exact path={url.BASE} component={Home} />
         <Route exact path={url.LOGIN} component={LoginPage} />
-        <Route exact path={url.USER_BASE} component={AreaLogada} />
+        <Route exact path={url.USER_BASE} component={UserArea} />
         <Route exact path={url.USER_REGISTER} component={RegisterUserPage} />
-        <Route exact path={url.EMPLOYEER_BASE} component={AreaFuncionario} />
-        <Route exact path={url.EMPLOYEER_BOOK} component={ProdutosPage} />
-        <Route exact path={url.EMPLOYEER_AUTHOR} component={AutoresPage} />
-        <Route exact path={url.EMPLOYEER_PUSHING} component={EditorasPage} />
+        <Route exact path={url.EMPLOYEER_BASE} component={EmployeeArea} />
+        <Route exact path={url.EMPLOYEER_BOOK} component={BooksPage} />
+        <Route exact path={url.EMPLOYEER_AUTHOR} component={AuthorsPage} />
+        <Route exact path={url.EMPLOYEER_PUSHING} component={PublishingsPage} />
       </Switch>
       <Footer />
     </PageContainer>

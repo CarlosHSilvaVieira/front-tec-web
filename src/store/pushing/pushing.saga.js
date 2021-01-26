@@ -9,10 +9,10 @@ function* createPushing({ payload }) {
       `${PUBLISHING_API}`,
       JSON.stringify({ editora: payload })
     );
-    console.log(result);
+    
     yield put({
       type: pushingActions.CREATE_PUSHING_SUCCESS,
-      lastId: result.id,
+      lastId: result.data.id,
       data: null,
     });
   } catch (error) {
@@ -30,10 +30,10 @@ function* editPushing({ payload }) {
       `${PUBLISHING_API}`,
       JSON.stringify({ editora: payload })
     );
-    console.log(result);
+    
     yield put({
       type: pushingActions.EDIT_PUSHING_SUCCESS,
-      lastId: result.id,
+      lastId: result.data.id,
       data: null,
     });
     yield put({ type: pushingActions.GET_ALL_PUSHINGS_START });
@@ -49,7 +49,7 @@ function* editPushing({ payload }) {
 function* deletePushing({ payload }) {
   try {
     const result = yield API.delete(`${PUBLISHING_API}/${payload.id}`);
-    console.log(result);
+    
     yield put({ type: pushingActions.DELETE_PUSHING_SUCCESS });
     yield put({ type: pushingActions.GET_ALL_PUSHINGS_START });
   } catch (error) {
@@ -71,7 +71,7 @@ function* getAllPushings() {
 
     yield put({
       type: pushingActions.GET_ALL_PUSHINGS_SUCCESS,
-      payload: result.autores,
+      payload: result.data.editoras,
     });
   } catch (error) {
     yield put({

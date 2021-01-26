@@ -20,7 +20,7 @@ let composeEnhancer = compose;
 
 if (process.env.NODE_ENV === "development") {
   composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  // middlewares.push(logger);
+  //middlewares.push(logger);
 }
 
 const store = createStore(

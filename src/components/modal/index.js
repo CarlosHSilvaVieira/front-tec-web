@@ -18,7 +18,7 @@ const Modal = ({ renderFooter, onClose, onClick, children, btnTitle, id, title }
             className="btn btn-primary"
             onClick={(e) => onClick?.(e)}
           >
-            {btnTitle || ""}
+            {btnTitle || "" }
           </button>
         </div>
       );
@@ -43,7 +43,7 @@ const Modal = ({ renderFooter, onClose, onClick, children, btnTitle, id, title }
               {title}
             </h5>
             <button
-              id={"closeModal"}
+              id="closeModal"
               type="button"
               className="close"
               data-dismiss="modal"

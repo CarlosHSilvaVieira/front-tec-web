@@ -9,10 +9,10 @@ function* createBook({ payload }) {
       `${BOOK_API}`,
       JSON.stringify({ produto: payload })
     );
-    console.log(result);
+    
     yield put({
       type: bookActions.CREATE_BOOK_SUCCESS,
-      lastId: result.id,
+      lastId: result.data.id,
       data: null,
     });
   } catch (error) {
@@ -30,10 +30,10 @@ function* editBook({ payload }) {
       `${BOOK_API}`,
       JSON.stringify({ produto: payload })
     );
-    console.log(result);
+    
     yield put({
       type: bookActions.EDIT_BOOK_SUCCESS,
-      lastId: result.id,
+      lastId: result.data.id,
       data: null,
     });
     yield put({ type: bookActions.GET_ALL_BOOKS_START });
@@ -49,7 +49,7 @@ function* editBook({ payload }) {
 function* deleteBook({ payload }) {
   try {
     const result = yield API.delete(`${BOOK_API}/${payload.id}`);
-    console.log(result);
+    
     yield put({ type: bookActions.DELETE_BOOK_SUCCESS });
     yield put({ type: bookActions.GET_ALL_BOOKS_START });
   } catch (error) {
@@ -63,7 +63,7 @@ function* deleteBook({ payload }) {
 
 function* getBooksHome() {
   try {
-    const result = yield axios.get(`${BOOK_API}/limit/10`, {
+    const result = yield API.get(`${BOOK_API}/limit/10`, {
       headers: {
         Accept: "application/json",
       },
@@ -71,7 +71,7 @@ function* getBooksHome() {
 
     yield put({
       type: bookActions.GET_BOOK_HOME_SUCCESS,
-      payload: result.produtos,
+      payload: result.data.produtos,
     });
   } catch (error) {
     yield put({
@@ -92,7 +92,7 @@ function* getAllBooks() {
 
     yield put({
       type: bookActions.GET_ALL_BOOKS_SUCCESS,
-      payload: result.autores,
+      payload: result.data.produtos,
     });
   } catch (error) {
     yield put({

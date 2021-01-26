@@ -66,18 +66,18 @@ const LoginForm = () => {
       <div className="form-group">
         <Switch
           handleSwitch={handleSwitch}
-          children={"Sou funcionário da BookStore"}
+          children="Sou funcionário da BookStore"
         />
       </div>
       <div className="form-group">
         <span>
-          Não possui cadastro ?{" "}
-          <Link to={"/cadastrar-agora"}>Cadastrar agora</Link>
+          Não possui cadastro ?" "
+          <Link to="/cadastrar-agora">Cadastrar agora</Link>
         </span>
       </div>
       <div className="form-group">
         <span>
-          Esqueceu seu login ? <Link to={"/alterar-senha"}>Alterar senha</Link>
+          Esqueceu seu login ? <Link to="/alterar-senha">Alterar senha</Link>
         </span>
       </div>
       <button type="button" onClick={handleLogin} className="btn btn-primary">

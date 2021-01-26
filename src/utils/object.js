@@ -1,1 +1,1 @@
-export const updateObject = (initialProps, newProps) => ({ ...initialProps, newProps });
+export const updateObject = (initialProps, newProps) => ({ ...initialProps, ...newProps });

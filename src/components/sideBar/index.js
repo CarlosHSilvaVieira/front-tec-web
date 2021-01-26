@@ -30,7 +30,7 @@ const SideBar = ({ menus }) => {
 
   return (
     <div
-      className={"col-md-2 col-lg-2 bg-light"}
+      className="col-md-2 col-lg-2 bg-light"
       style={{ marginBottom: "20px" }}
     >
       <div className={style.sidebar}>{renderMenus()}</div>

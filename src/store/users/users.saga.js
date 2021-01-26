@@ -9,10 +9,10 @@ function* createUser({ payload }) {
       `${USER_API}`,
       JSON.stringify({ usuario: payload })
     );
-    console.log(result);
+
     yield put({
       type: usersActions.CREATE_USER_SUCCESS,
-      lastId: result.id,
+      lastId: result.data.id,
       data: null,
     });
   } catch (error) {
@@ -30,10 +30,10 @@ function* editUser({ payload }) {
       `${USER_API}`,
       JSON.stringify({ usuario: payload })
     );
-    console.log(result);
+    
     yield put({
       type: usersActions.EDIT_USER_SUCCESS,
-      lastId: result.id,
+      lastId: result.data.id,
       data: null,
     });
     yield put({ type: usersActions.GET_ALL_USERS_START });
@@ -49,7 +49,7 @@ function* editUser({ payload }) {
 function* deleteUser({ payload }) {
   try {
     const result = yield API.delete(`${USER_API}/${payload.id}`);
-    console.log(result);
+    
     yield put({ type: usersActions.DELETE_USER_SUCCESS });
     yield put({ type: usersActions.GET_ALL_USERS_START });
   } catch (error) {
@@ -71,7 +71,7 @@ function* getAllUsers() {
 
     yield put({
       type: usersActions.GET_ALL_USERS_SUCCESS,
-      payload: result.autores,
+      payload: result.data.usuarios,
     });
   } catch (error) {
     yield put({
@@ -98,7 +98,7 @@ function* loginUser({ payload }) {
 
     yield put({
       type: usersActions.USER_LOGIN_SUCCESS,
-      payload: result.resultado,
+      payload: result.data.resultado,
     });
   } catch (error) {
     yield put({

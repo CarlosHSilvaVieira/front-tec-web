@@ -1,49 +1,41 @@
-import React from 'react'
-import LoginForm from '../../components/form/login'
-import style from './login.module.css'
-import connect from './connect'
+import React, { useEffect } from "react";
+import LoginForm from "../../components/form/login";
+import style from "./login.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { history } from "../../store/store";
+import * as url from "../../utils/url";
 
-class LoginPage extends React.Component {
+const LoginPage = () => {
+  const { userLogged, employee } = useSelector((state) => ({
+    userLogged: state.user.user.data,
+    employee: state.employee.employee.data,
+  }));
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-
-        if (nextProps.userLogged) {
-
-            nextProps.redirect('/area-logada')
-        }
-        else if (nextProps.employee) {
-
-            nextProps.redirect('/area-do-funcionario')
-        }
-
-        return null
+  const redirectToLogged = () => {
+    if (userLogged) {
+      history.push(url.USER_BASE);
+    } else if (employee) {
+      history.push(url.EMPLOYEER_BASE);
     }
+  };
 
+  useEffect(() => {
+    redirectToLogged();
+  }, [userLogged, employee]);
 
-    componentWillMount() {
+  useEffect(() => {
+    redirectToLogged();
+  }, []);
 
-        if (this.props.userLogged) {
+  return (
+    <div className="container-fluid">
+      <div className="row">
+        <div className={style.hero}>
+          <LoginForm />
+        </div>
+      </div>
+    </div>
+  );
+};
 
-            this.props.redirect('/area-logada')
-        }
-        else if (this.props.employee) {
-
-            this.props.redirect('/area-do-funcionario')
-        }
-    }
-
-    render() {
-
-        return (
-            <div className={'container-fluid'}>
-                <div className={'row'}>
-                    <div className={style.hero}>
-                        <LoginForm />
-                    </div>
-                </div>
-            </div>
-        )
-    }
-}
-
-export default connect(LoginPage)
+export default LoginPage;

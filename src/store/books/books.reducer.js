@@ -133,8 +133,9 @@ const getBookHomeStart = (state) =>
 const getBookHomeSucess = (state, action) =>
   updateObject(state, {
     listBooksHome: {
+      ...state.listBooksHome,
       resultType: "success",
-      rows: action?.data,
+      rows: action.payload,
     },
   });
 

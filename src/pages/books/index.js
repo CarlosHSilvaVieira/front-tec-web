@@ -1,141 +1,122 @@
-import React from 'react'
-import connect from './connect'
-import style from './produtos.module.css'
-import { menus } from '../../utils/constants'
+import React, { useEffect } from "react";
+import style from "./books.module.css";
+import { menus } from "../../utils/constants";
 
-import Sidebar from '../../components/sideBar'
-import Table from '../../components/table'
-import Modal from '../../components/modal'
-import FormBook from '../../components/form/book'
+import Sidebar from "../../components/sideBar";
+import Table from "../../components/table";
+import Modal from "../../components/modal";
+import FormBook from "../../components/form/book";
 
-class ProdutosPage extends React.Component {
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createBookStart,
+  editBookStart,
+  deleteBookStart,
+  getAllBooksStart,
+} from "../../store/books/books.actions";
 
-    constructor(props) {
-        super(props)
+const BooksPage = () => {
+  const [title, setTitle] = useState("Cadastrar");
+  const [selectedBook, setSelectedBook] = useState(null);
+  const [formSaveFunction, setFormSaveFunction] = useState(() => {});
+  const [formCancelFunction, setFormCancelFunction] = useState(() => {});
 
-        this.state = {
-            title: 'Cadastrar',
-            saveFunction: () => {},
-            cancelFunction: () => {},
-            last_id: this.props.last_id,
-        }
+  const dispatch = useDispatch();
 
-        this.create = this.create.bind(this)
-        this.edit = this.edit.bind(this)
-        this.remove = this.remove.bind(this)
+  const { books, lastId } = useSelector((state) => ({
+    books: state.book.listBooks.rows,
+    lastId: state.book.createBook.lastId,
+  }));
 
-        this.onClickCreate = this.onClickCreate.bind(this)
-        this.onClickEdit = this.onClickEdit.bind(this)
+  useEffect(() => {
+    if (lastId) {
+      dispatch(getAllBooksStart());
     }
+  }, [lastId]);
 
-    static getDerivedStateFromProps(nextProps, prevState) {
+  useEffect(() => {
+    dispatch(getAllBooksStart());
+  }, []);
 
-        if (nextProps.last_id !== prevState.last_id) {
-            nextProps.getAllProdutos()
-
-            return {
-                ...prevState,
-                last_id: nextProps.last_id
-            }
-        }
-        return null        
+  const createTableHeaders = () => {
+    if (books.length) {
+      const book = books[0];
+      return Object.keys(book);
     }
+    return [];
+  };
 
-    componentDidMount() {
-        this.props.getAllProdutos()
-    }
+  const onClickCreate = () => {
+    setTitle("Cadastrar");
+    setSelectedBook(null);
+    setFormSaveFunction(onCreate);
+  };
 
-    createTableHeaders() {
-        if (this.props.produtos.length) {
+  const onClickEdit = (book) => {
+    setTitle("Editar");
+    setSelectedBook(book);
+    setFormSaveFunction(onEdit);
+  };
 
-            const produto = this.props.produtos[0]
-            return Object.keys(produto)
-        }
-        return []
-    }
+  const onCreate = (book) => {
+    dispatch(createBookStart(book));
+  };
 
-    onClickCreate() {
-        this.setState({
-            title: 'Cadastrar',
-            saveFunction: this.create,
-            cancelFunction: () => {},
-            target_produto: null,
-        })
-    }
+  const onEdit = (book) => {
+    dispatch(editBookStart(book));
+    document.getElementById("closeModal").click();
+  };
 
-    onClickEdit(produto) {
+  const onRemove = (book) => {
+    dispatch(deleteBookStart(book));
+  };
 
-        this.setState({
-            title: 'Editar',
-            saveFunction: this.edit,
-            cancelFunction: () => {},
-            target_produto: produto,
-        })
-    }
-
-    create(produto) {
-        this.props.create(produto)
-    }
-
-    edit(produto) {
-        this.props.edit(produto)
-        document.getElementById('closeModal').click()
-    }
-
-    remove(produto) {
-        this.props.remove(produto)
-    }
-
-    render() {
-
-        return (
-            <div className={'container-fluid'} style={{ minHeight: '100vh' }}>
-                <div className={'row'} style={{ minHeight: '100vh' }}>
-                    <Sidebar menus={menus} />
-                    <div className={'col'}>
-                        <div className={'row'}>
-                            <div className={style.title}>
-                                <h2>Gerenciamento de produtos</h2>
-                            </div>
-                        </div>
-                        <div className={'row'}>
-                            <div className={style.btn_container}>
-                                <button
-                                    className={'btn btn-primary'}
-                                    type={'button'}
-                                    data-toggle="modal"
-                                    data-target="#exampleModalCenter"
-                                    onClick={this.onClickCreate}
-                                >
-                                    Cadastrar Produto
-                                </button>
-                            </div>
-                        </div>
-                        <Modal id={'exampleModalCenter'} title={this.state.title}>
-                            <FormBook
-                                handleSave={this.state.saveFunction}
-                                handleCancel={this.state.cancelFunction}
-                                cancelText={'Cancelar'}
-                                saveText={'Salvar'}
-                                book={this.state.target_produto}
-                            />
-                        </Modal>
-                        <div className={'row'}>
-                            <Table
-                                headers={this.createTableHeaders()}
-                                data={this.props.produtos}
-                                onVisualize={() => { }}
-                                onEdit={this.onClickEdit}
-                                onRemove={this.remove}
-                                modal_id={'#exampleModalCenter'}
-                            />
-                        </div>
-                    </div>
-
-                </div>
+  return (
+    <div className="container-fluid" style={{ minHeight: "100vh" }}>
+      <div className="row" style={{ minHeight: "100vh" }}>
+        <Sidebar menus={menus} />
+        <div className="col">
+          <div className="row">
+            <div className={style.title}>
+              <h2>Gerenciamento de books</h2>
             </div>
-        )
-    }
-}
+          </div>
+          <div className="row">
+            <div className={style.btn_container}>
+              <button
+                className="btn btn-primary"
+                type="button"
+                data-toggle="modal"
+                data-target="#exampleModalCenter"
+                onClick={onClickCreate}
+              >
+                Cadastrar Produto
+              </button>
+            </div>
+          </div>
+          <Modal id="exampleModalCenter" title={title}>
+            <FormBook
+              handleSave={formSaveFunction}
+              handleCancel={formCancelFunction}
+              cancelText="Cancelar"
+              saveText="Salvar"
+              book={selectedBook}
+            />
+          </Modal>
+          <div className="row">
+            <Table
+              headers={createTableHeaders()}
+              data={books}
+              onVisualize={() => {}}
+              onEdit={onClickEdit}
+              onRemove={onRemove}
+              modal_id="#exampleModalCenter"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default connect(ProdutosPage)
+export default BooksPage;

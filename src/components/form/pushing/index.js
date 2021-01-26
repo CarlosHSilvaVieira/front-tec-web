@@ -57,56 +57,56 @@ const FormPushing = ({
 
   return (
     <div>
-      <div className={"form-group"}>
+      <div className="form-group">
         <label>Nome</label>
         <input
-          type={"text"}
-          id={"name"}
-          placeholder={"Nome"}
-          className={"form-control"}
+          type="text"
+          id="name"
+          placeholder="Nome"
+          className="form-control"
           onChange={handleChange}
           value={statePushing?.name}
         />
       </div>
-      <div className={"form-group"}>
+      <div className="form-group">
         <label>Descrição</label>
         <input
-          type={"text"}
-          id={"description"}
-          placeholder={"Descrição"}
-          className={"form-control"}
+          type="text"
+          id="description"
+          placeholder="Descrição"
+          className="form-control"
           onChange={handleChange}
           value={statePushing?.description}
         />
       </div>
-      <div className={"form-control"}>
+      <div className="form-control">
         <label>Endereço</label>
         <input
-          type={"text"}
-          id={"address"}
-          placeholder={"Endereço"}
-          className={"form-control"}
+          type="text"
+          id="address"
+          placeholder="Endereço"
+          className="form-control"
           onChange={handleChange}
           value={statePushing?.address}
         />
       </div>
 
-      <div className={"form-row"}>
-        <div className={"form-group col-md-6"}>
+      <div className="form-row">
+        <div className="form-group col-md-6">
           <button
             type="button"
             data-dismiss="modal"
             onClick={onCancel}
-            className={"btn btn-block btn-danger"}
+            className="btn btn-block btn-danger"
           >
             {cancelText}
           </button>
         </div>
-        <div className={"form-group col-md-6"}>
+        <div className="form-group col-md-6">
           <button
             type="button"
             onClick={onSave}
-            className={"btn btn-block btn-primary"}
+            className="btn btn-block btn-primary"
           >
             {saveText}
           </button>

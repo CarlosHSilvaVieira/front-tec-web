@@ -90,7 +90,7 @@ const FormUser = () => {
           onChange={handleChange}
         />
       </div>
-      <div className={"form-row"}>
+      <div className="form-row">
         <div className="form-group col-md-6">
           <label for="inputCPF">CPF</label>
           <input
@@ -103,8 +103,8 @@ const FormUser = () => {
         </div>
       </div>
       <button
-        type={"button"}
-        className={"btn btn-block btn-primary"}
+        type="button"
+        className="btn btn-block btn-primary"
         onClick={handleSubmit}
       >
         Cadastrar
