@@ -1,42 +1,37 @@
-import React from 'react'
+import React from "react";
+import { useDispatch } from "react-redux";
+import {  history} from "../../store/store"
+import "./card.module.css";
+import { AddItemToCart } from "../../store/users/users.actions"
 
-import './card.module.css'
+const Card = ({ produto }) => {
+  const dispatch = useDispatch();
 
-class Card extends React.Component {
+  const handleBuy = () => {
+    dispatch(AddItemToCart(produto));
+    history.push("/carrinho");
+  };
 
-    constructor(props) {
-        super(props)
+  if (!produto) {
+    return null;
+  }
 
-        this.handleBuy = this.handleBuy.bind(this)
-    }
+  return (
+    <div
+      className="card"
+      style={{ width: "18rem", margin: "20px 0px 0px 0px", maxHeight: "24rem" }}
+    >
+      <img src="/images/screen.jpg" className="card-img-top" alt="..." />
+      <div className="card-body">
+        <h5 className="card-title">{produto?.name}</h5>
+        <p className="card-text">{produto?.description}</p>
+        <p className="card-text">R${produto?.price}</p>
+        <button type="button" className="btn btn-primary" onClick={(e) => handleBuy()}>
+          Comprar
+        </button>
+      </div>
+    </div>
+  );
+};
 
-    handleBuy() {
-        this.props.addCarrinho(this.props.produto)
-        this.props.redirect('/carrinho')
-    }
-
-    createButton() {
-
-    }
-
-    render() {
-
-        if (!this.props.produto) {
-            return(null)
-        }
-
-        return(
-            <div className="card" style={{ width: '18rem', margin: '20px 0px 0px 0px', maxHeight: '24rem' }}>
-                <img src={'/images/screen.jpg'} className="card-img-top" alt="..." />
-                <div className="card-body">
-                    <h5 className="card-title">{this.props.produto.nome}</h5>
-                    <p className="card-text">{this.props.produto.descricao}</p>
-                    <p className="card-text">R${this.props.produto.valor_unitario}</p>
-                    <button type={'button'} className="btn btn-primary">Comprar</button>
-                </div>
-            </div>
-        )
-    }
-}
-
-export default Card
+export default Card;

@@ -1,32 +1,37 @@
-import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import { PageContainer } from "../styles/shared";
 
-import Home from '../pages/home'
-import LoginPage from '../pages/login'
-import RegisterUserPage from '../pages/registerUser'
-import AreaFuncionario from '../pages/areaFuncionario'
-import ProdutosPage from '../pages/produtos'
-import AutoresPage from '../pages/autores'
-import EditorasPage from '../pages/editoras'
-import AreaLogada from '../pages/areaLogada'
-import NavBar from '../components/navbar'
-import Footer from '../components/footer'
+import * as url from "../utils/url";
 
-const routes = (
-    <div>
-        <NavBar />
-        <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/login' component={LoginPage} />
-            <Route exact path='/cadastrar-agora' component={RegisterUserPage} />
-            <Route exact path='/area-do-funcionario' component={AreaFuncionario} />
-            <Route exact path='/area-logada' component={AreaLogada} />
-            <Route exact path='/produtos' component={ProdutosPage} />
-            <Route exact path='/autores' component={AutoresPage} />
-            <Route exact path='/editoras' component={EditorasPage} />
-        </Switch>
-        <Footer />
-    </div>
-)
+import Home from "../pages/home";
+import LoginPage from "../pages/login";
+import RegisterUserPage from "../pages/registerUser";
+import EmployeeArea from "../pages/employeeArea";
+import BooksPage from "../pages/books";
+import AuthorsPage from "../pages/authors";
+import PublishingsPage from "../pages/pushings";
+import UserArea from "../pages/userArea";
+import NavBar from "../components/navbar";
+import Footer from "../components/footer";
 
-export default routes
+const Routes = () => (
+  <>
+    <NavBar />
+    <PageContainer>
+      <Switch>
+        <Route exact path={url.BASE} component={Home} />
+        <Route exact path={url.LOGIN} component={LoginPage} />
+        <Route exact path={url.USER_BASE} component={UserArea} />
+        <Route exact path={url.USER_REGISTER} component={RegisterUserPage} />
+        <Route exact path={url.EMPLOYEER_BASE} component={EmployeeArea} />
+        <Route exact path={url.EMPLOYEER_BOOK} component={BooksPage} />
+        <Route exact path={url.EMPLOYEER_AUTHOR} component={AuthorsPage} />
+        <Route exact path={url.EMPLOYEER_PUSHING} component={PublishingsPage} />
+      </Switch>
+      <Footer />
+    </PageContainer>
+  </>
+);
+
+export default Routes;

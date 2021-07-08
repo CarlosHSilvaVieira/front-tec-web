@@ -1,11 +1,11 @@
 import React from 'react'
 import { ConnectedRouter } from 'connected-react-router'
-import routes from './routes'
+import Routes from './routes'
 
 const App = (props) => {
   return (
     <ConnectedRouter history={props.history}>
-      { routes }
+      <Routes />
     </ConnectedRouter>
   )
 }

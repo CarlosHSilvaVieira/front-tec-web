@@ -3,10 +3,10 @@ import { map } from "lodash";
 import { Link } from "react-router-dom";
 import style from "./sidebar.module.css";
 
-const SideBar = () => {
+const SideBar = ({ menus }) => {
 
   const renderMenus = () => {
-    return map(this.props.menus, (menu, index) => {
+    return map(menus, (menu, index) => {
       return (
         <div key={index}>
           <h6>{menu.title}</h6>
@@ -30,7 +30,7 @@ const SideBar = () => {
 
   return (
     <div
-      className={"col-md-2 col-lg-2 bg-light"}
+      className="col-md-2 col-lg-2 bg-light"
       style={{ marginBottom: "20px" }}
     >
       <div className={style.sidebar}>{renderMenus()}</div>

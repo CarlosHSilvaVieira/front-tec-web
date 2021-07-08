@@ -1,39 +1,35 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import { routerMiddleware } from 'connected-react-router'
+import { createStore, applyMiddleware, compose } from "redux";
+import { routerMiddleware } from "connected-react-router";
 
-import thunk from 'redux-thunk'
-import { createBrowserHistory } from 'history'
-import rootReducer from './reducers'
+import logger from "redux-logger";
+import createSagaMiddleware from "redux-saga";
+import { createBrowserHistory } from "history";
+import mySaga from "./saga";
+import rootReducer from "./reducer";
 
 // cria o historico do browser
-export const history = createBrowserHistory()
+export const history = createBrowserHistory();
 // estado inicial do redux
-const initialState = {}
+const initialState = {};
 
-let composeEnhancer = compose
+const sagaMiddleware = createSagaMiddleware();
 
-if (process.env.NODE_ENV === 'development') {
-  composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const middlewares = [sagaMiddleware, routerMiddleware(history)];
+
+let composeEnhancer = compose;
+
+if (process.env.NODE_ENV === "development") {
+  composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  middlewares.push(logger);
 }
 
 const store = createStore(
   rootReducer(history),
   initialState,
-  composeEnhancer(
-    applyMiddleware(
-      thunk,
-      routerMiddleware(history)
-    )
-  )
-)
+  composeEnhancer(applyMiddleware(...middlewares))
+);
 
-// Hot reloading
-if (module.hot) {
-  // Enable Webpack hot module replacement for reducers
-  module.hot.accept('./reducers', () => {
-    store.replaceReducer(rootReducer(history));
-  });
-}
+// then run the saga
+sagaMiddleware.run(mySaga);
 
-
-export default store
+export default store;

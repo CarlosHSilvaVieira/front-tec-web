@@ -1,32 +1,27 @@
-import React from 'react'
+import React, { useState } from "react";
 
-class Switch extends React.Component {
+const Switch = ({ handleSwitch, children }) => {
+  const [value, setValue] = useState(false);
 
-    constructor(props) {
-        super (props)
+  const onSwitch = (event) => {
+    setValue(event.target.checked);
+    handleSwitch?.(event.target.checked);
+  };
 
-        this.state = {
-            value: false
-        }
+  return (
+    <div className="custom-control custom-switch">
+      <input
+        value={value}
+        onChange={(e) => onSwitch(e)}
+        type="checkbox"
+        className="custom-control-input"
+        id="customSwitch1"
+      />
+      <label className="custom-control-label" for="customSwitch1">
+        {children}
+      </label>
+    </div>
+  );
+};
 
-        this.handleSwitch = this.handleSwitch.bind(this)
-    }
-
-    handleSwitch(event) {
-
-        this.setState({ value: event.target.checked })
-        this.props.handleSwitch(event.target.checked)
-    }
-
-    render() {
-
-        return (
-            <div className="custom-control custom-switch">
-                <input value={this.state.value} onChange={this.handleSwitch} type="checkbox" className="custom-control-input" id="customSwitch1" />
-                <label className="custom-control-label" for="customSwitch1">{this.props.children}</label>
-            </div>
-        )
-    }
-}
-
-export default Switch
+export default Switch;
